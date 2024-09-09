@@ -25,37 +25,56 @@ const TodoList = () => {
   };
 
   return (
-    <div>
-      <h1>Todo List</h1>
-      <form onSubmit={addTodo}>
-        <input
-          type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-        />
-        <button type="submit">Add Todo</button>
-      </form>
-      <ul>
-        {todos.map((todo) => (
-          <li
-            key={todo.id}
-            style={{
-              textDecoration: todo.completed ? "line-through" : "none",
-            }}
-            onClick={() => toggleTodo(todo.id)}
+    <div className="flex justify-center h-screen brightness-100 items-center">
+      <div className="flex flex-col w-fit rounded py-4 px-4 bg-gray-100 shadow-2xl gap-5">
+        <div className="w-full flex justify-center">
+          <h1 className=" text-center font-bold border-b-2 border-black w-fit">
+            Todo List
+          </h1>
+        </div>
+        <form className="flex gap-1 " onSubmit={addTodo}>
+          <input
+            className="w-72 shadow-lg p-1"
+            placeholder="Enter Your List"
+            type="text"
+            value={newTodo}
+            onChange={(e) => setNewTodo(e.target.value)}
+          />
+          <button
+            className="bg-sky-600 shadow-lg rounded px-3 py-1 font-semibold"
+            type="submit"
           >
-            {todo.text}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                deleteTodo(todo.id);
-              }}
+            Add Todo
+          </button>
+        </form>
+        <ul className="space-y-2">
+          {todos.map((todo) => (
+            <li
+              className="flex items-center max-w-96 gap-2 bg-gray-200 rounded py-1 px-2  justify-between"
+              key={todo.id}
+              onClick={() => toggleTodo(todo.id)}
             >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+              <p
+                style={{
+                  textDecoration: todo.completed ? "line-through" : "none",
+                }}
+                className="break-all"
+              >
+                {todo.text}
+              </p>
+              <button
+                className="bg-emerald-500 rounded-full py-1 px-4"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteTodo(todo.id);
+                }}
+              >
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
